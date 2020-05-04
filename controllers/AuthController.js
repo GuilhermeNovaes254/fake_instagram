@@ -12,7 +12,7 @@ const AuthController = {
     },
 
     showHome: (req,res) => {
-        console.log(req.session.usuario);
+        //console.log(req.session.usuario);
         res.render('index');
     },
 
