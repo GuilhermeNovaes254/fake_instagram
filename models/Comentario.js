@@ -1,5 +1,5 @@
 let Comentario = (sequelize, DataTypes) => {
-    return sequelize.define(
+    let comentario = sequelize.define(
         'Comentario',
         {
             id: {
@@ -9,16 +9,16 @@ let Comentario = (sequelize, DataTypes) => {
                 allowNull:false
             },
             texto: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(100),
                 allowNull: false
             },
             usuarios_id: {
                 type: DataTypes.INTEGER,
-                allowNull: true
+                allowNull: false
             },
-            post_id: {
+            posts_id: {
                 type: DataTypes.INTEGER,
-                allowNull: true
+                allowNull: false
             }
         },{
             tableName: "comentarios",
@@ -26,6 +26,11 @@ let Comentario = (sequelize, DataTypes) => {
         }
 
     );
+
+    comentario.associate = (models) => {
+        comentario.belongsTo(models.Post,{foreignKey:'posts_id',as:'post'})
+    }
+    return comentario;
 }
 
 module.exports = Comentario;
